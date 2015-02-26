@@ -1,6 +1,7 @@
+var fetchModule = {};
 (function() {
   'use strict';
-
+  var self = this;
   if (self.fetch) {
     return
   }
@@ -341,4 +342,8 @@
     return new Request(url, options).fetch()
   }
   self.fetch.polyfill = true
-})();
+}).call(fetchModule);
+
+module.exports = {
+  fetch:fetchModule.fetch
+};

@@ -112,15 +112,30 @@ var fetchModule = {};
   }
 
   var support = {
-    blob: 'FileReader' in self && 'Blob' in self && (function() {
+    blob: (function() {
       try {
+        new FileReader();
+        return true
+      } catch(e) {
+        return false
+      }
+    })() && (function() {
+      
+		try {
         new Blob();
         return true
       } catch(e) {
         return false
       }
     })(),
-    formData: 'FormData' in self
+    formData: (function() {
+      try {
+        new FormData();
+        return true
+      } catch(e) {
+        return false
+      }
+    })()
   }
 
   function Body() {
